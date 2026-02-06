@@ -7,10 +7,10 @@ public class Exoplanet {
 	double radius;
 	double mass;
 	double orbitalPeriod;
-	double discoveryMethod;
+	String discoveryMethod;
 	double distance;
 	
-	public Exoplanet(String n, String h, double r, double m, double o, double dm, double d) {
+	public Exoplanet(String n, String h, double r, double m, double o, String dm, double d) {
 		this.name = n;
 		this.hostStar = h;
 		this.radius = r;
