@@ -40,7 +40,7 @@ public class Exoplanet {
 		return(this.orbitalPeriod);
 	}
 	
-	public double getDiscoveryMethod() {
+	public String getDiscoveryMethod() {
 		return(this.discoveryMethod);
 	}
 
