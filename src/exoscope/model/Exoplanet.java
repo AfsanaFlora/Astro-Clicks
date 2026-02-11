@@ -30,15 +30,15 @@ public class Exoplanet {
 		return hostStar ;
 	}
 	
-	public double getRadius() {
+	public Double getRadius() {
 		return radius ;
 	}
 	
-	public double getMass() {
+	public Double getMass() {
 		return mass;
 	}
 	
-	public double getOrbitalPeriod() {
+	public Double getOrbitalPeriod() {
 		return orbitalPeriod;
 	}
 	
@@ -46,11 +46,11 @@ public class Exoplanet {
 		return discoveryMethod;
 	}
 
-	public double getDistance() {
+	public Double getDistance() {
 		return distance ;
 	}
 	
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 	
