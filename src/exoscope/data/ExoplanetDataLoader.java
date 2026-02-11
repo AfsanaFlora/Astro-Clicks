@@ -1,31 +1,74 @@
 package data;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import model.Exoplanet;
+import java.io.*;
+import java.util.*;
 
 public class ExoplanetDataLoader {
 
-    public void loadCSV(String filePath) {
+    private String filePath;
+
+    // this is constructor
+    public ExoplanetDataLoader(String filePath) {
+        this.filePath = filePath;
+    }
+
+    // the method to load planets and return list
+    public List<Exoplanet> loadExoplanets() {
+
+        List<Exoplanet> planets = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line;
+            br.readLine(); // so we can skip header
 
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+
+                String[] fields = line.split(",");
+
+                String name = fields[0];
+                String hostStar = fields[1];
+
+                Double radius = parseDouble(fields[2]);
+                Double mass = parseDouble(fields[3]);
+                Double orbitalPeriod = parseDouble(fields[4]);
+
+                String discoveryMethod = fields[5];
+                Double distance = parseDouble(fields[6]);
+                Integer year = parseInt(fields[7]);
+
+                Exoplanet planet = new Exoplanet(
+                        name, hostStar, radius, mass,
+                        orbitalPeriod, discoveryMethod,
+                        distance, year
+                );
+
+                planets.add(planet);
             }
 
         } catch (IOException e) {
-            System.out.println("There's been an error in loading this csv file: " + e.getMessage());
+            System.out.println("there's been an error in loading this csv file: " + e.getMessage());
+        }
+
+        return planets;
+    }
+
+    private Double parseDouble(String value) {
+        try {
+            if (value == null || value.trim().isEmpty()) return null;
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            return null;
         }
     }
 
-    // to do a quick test runner so we know it's working
-    public static void main(String[] args) {
-
-        ExoplanetDataLoader loader = new ExoplanetDataLoader();
-
-        loader.loadCSV("/Users/tuba/Desktop/Spring 2026/ CS 332 - Soft Eng/Astro-Clicks/src/exoscope/data/exoplanets.csv");
+    private Integer parseInt(String value) {
+        try {
+            if (value == null || value.trim().isEmpty()) return null;
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }
