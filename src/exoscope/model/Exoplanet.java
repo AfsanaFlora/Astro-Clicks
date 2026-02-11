@@ -2,55 +2,63 @@ package model;
 
 public class Exoplanet {
 	
-	String name;
-	String hostStar;
-	double radius;
-	double mass;
-	double orbitalPeriod;
-	String discoveryMethod;
-	double distance;
-	int year;
+	private String name; // using private is standard OOP encapsulation
+	private String hostStar;
+	private Double radius;
+	private Double mass;
+	private Double  orbitalPeriod;
+	private String discoveryMethod;
+	private Double distance;
+	private Integer year;
 	
-	public Exoplanet(String n, String h, double r, double m, double o, String dm, double d, int y) {
-		this.name = n;
-		this.hostStar = h;
-		this.radius = r;
-		this.mass = m;
-		this.orbitalPeriod = o;
-		this.discoveryMethod = dm;
-		this.distance = d;
-		this.year = y;
+	public Exoplanet(String name, String hostStar, Double radius, Double mass, Double orbitalPeriod, String discoveryMethod, Double distance, Integer year) {
+		this.name = name;
+		this.hostStar = hostStar;
+		this.radius = radius;
+		this.mass = mass;
+		this.orbitalPeriod = orbitalPeriod;
+		this.discoveryMethod = discoveryMethod;
+		this.distance = distance;
+		this.year = year;
 	}
 	
 	public String getName() {
-		return(this.name);
+		return name;
 	}
 	
 	public String getHostStar() {
-		return(this.hostStar);
+		return hostStar ;
 	}
 	
 	public double getRadius() {
-		return(this.radius);
+		return radius ;
 	}
 	
 	public double getMass() {
-		return(this.mass);
+		return mass;
 	}
 	
 	public double getOrbitalPeriod() {
-		return(this.orbitalPeriod);
+		return orbitalPeriod;
 	}
 	
 	public String getDiscoveryMethod() {
-		return(this.discoveryMethod);
+		return discoveryMethod;
 	}
 
 	public double getDistance() {
-		return(this.distance);
+		return distance ;
 	}
 	
 	public int getYear() {
-		return(this.year);
+		return year;
+	}
+	
+	@Override
+	public String toString() {
+		return "Name: " + name +
+		       ", Year: " + year +
+		       ", Radius: " + radius +
+		       ", Method: " + discoveryMethod;
 	}
 }
