@@ -9,8 +9,9 @@ public class Exoplanet {
 	double orbitalPeriod;
 	String discoveryMethod;
 	double distance;
+	int year;
 	
-	public Exoplanet(String n, String h, double r, double m, double o, String dm, double d) {
+	public Exoplanet(String n, String h, double r, double m, double o, String dm, double d, int y) {
 		this.name = n;
 		this.hostStar = h;
 		this.radius = r;
@@ -18,6 +19,7 @@ public class Exoplanet {
 		this.orbitalPeriod = o;
 		this.discoveryMethod = dm;
 		this.distance = d;
+		this.year = y;
 	}
 	
 	public String getName() {
@@ -40,11 +42,15 @@ public class Exoplanet {
 		return(this.orbitalPeriod);
 	}
 	
-	public double getDiscoveryMethod() {
+	public String getDiscoveryMethod() {
 		return(this.discoveryMethod);
 	}
 
 	public double getDistance() {
 		return(this.distance);
+	}
+	
+	public int getYear() {
+		return(this.year);
 	}
 }
