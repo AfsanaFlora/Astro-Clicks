@@ -17,6 +17,8 @@ public class ExoplanetDataLoader {
     public List<Exoplanet> loadExoplanets() {
 
         List<Exoplanet> planets = new ArrayList<>();
+        System.out.println(new File ("").getAbsolutePath());
+        
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 

@@ -1,6 +1,7 @@
 import model.Exoplanet;
 import java.util.*;
 import data.ExoplanetDataLoader;
+import java.io.*;
 
  /* public class Main {
 
@@ -30,7 +31,7 @@ public class Main {
 
         // to create the data loader & then give it the csv file path
         ExoplanetDataLoader loader =
-                new ExoplanetDataLoader("/Users/tuba/Desktop/Spring 2026/ CS 332 - Soft Eng/Astro-Clicks/src/exoscope/data/exoplanets.csv");
+                new ExoplanetDataLoader("src/exoscope/data/exoplanets.csv");
 
         // to load all planets from the file
         List<Exoplanet> planets = loader.loadExoplanets();
