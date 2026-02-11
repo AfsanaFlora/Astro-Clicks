@@ -62,3 +62,5 @@ public class Exoplanet {
 		       ", Method: " + discoveryMethod;
 	}
 }
+
+// using wrapper instead of primitive data types because if csv file has missing values (null), calling getRadius() or getYear() will throw a nullpointerexception  eroor

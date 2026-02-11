@@ -1,5 +1,5 @@
+// https://stackoverflow.com/questions/76407302/how-to-read-large-csv-data-into-memory-with-bufferedreader
 package data;
-
 import model.Exoplanet;
 import java.io.*;
 import java.util.*;
@@ -27,6 +27,9 @@ public class ExoplanetDataLoader {
 
                 String[] fields = line.split(",");
 
+                // to skip lines that don't have enough columns
+                if (fields.length < 8) continue;
+
                 String name = fields[0];
                 String hostStar = fields[1];
 
@@ -38,14 +41,11 @@ public class ExoplanetDataLoader {
                 Double distance = parseDouble(fields[6]);
                 Integer year = parseInt(fields[7]);
 
-                Exoplanet planet = new Exoplanet(
-                        name, hostStar, radius, mass,
-                        orbitalPeriod, discoveryMethod,
-                        distance, year
-                );
+                Exoplanet planet = new Exoplanet(name, hostStar, radius, mass, orbitalPeriod, discoveryMethod, distance, year);
 
                 planets.add(planet);
             }
+
 
         } catch (IOException e) {
             System.out.println("there's been an error in loading this csv file: " + e.getMessage());
@@ -72,3 +72,5 @@ public class ExoplanetDataLoader {
         }
     }
 }
+
+//

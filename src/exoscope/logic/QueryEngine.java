@@ -1,15 +1,20 @@
 package logic;
 import model.Exoplanet;
+import java.util.ArrayList;
 import java.util.*;
 
+@SuppressWarnings("unused")
 public class QueryEngine {
 	
 	List<Exoplanet> planets;
 	List<Exoplanet> results;
 	
-	public QueryEngine(List<Exoplanet> p) {
-		this.planets = p;
-	}
+	
+	// this is a constructor to takes a list of planets
+    public QueryEngine(List<Exoplanet> p) {
+        // to record a copy so original list does not change
+        this.planets = new ArrayList<>(planets);
+    }
 	
 	public List<Exoplanet> filterByRadius(double min, double max) {
 		for (Exoplanet planet : planets) {
