@@ -22,31 +22,34 @@ public class ExoplanetDataLoader {
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
+        	for (int i = 0; i < 294; i++) {
+        		br.readLine();
+        	}
+        	
             String line;
-            br.readLine(); // so we can skip header
 
             while ((line = br.readLine()) != null) {
 
                 String[] fields = line.split(",");
 
-                // to skip lines that don't have enough columns
-                if (fields.length < 8) continue;
-
-                String name = fields[0];
-                String hostStar = fields[1];
-
-                Double radius = parseDouble(fields[2]);
-                Double mass = parseDouble(fields[3]);
-                Double orbitalPeriod = parseDouble(fields[4]);
-
-                String discoveryMethod = fields[5];
-                Double distance = parseDouble(fields[6]);
-                Integer year = parseInt(fields[7]);
+                String name = fields[1];
+                String hostStar = fields[2];
+                Double radius = parseDouble(fields[43]);
+                if (radius == null || radius == 0.0) continue;
+                Double mass = parseDouble(fields[51]);
+                if (mass == null || mass == 0.0) continue;
+                Double orbitalPeriod = parseDouble(fields[35]);
+                if (orbitalPeriod == null || orbitalPeriod == 0.0) continue;
+                String discoveryMethod = fields[14];
+                Double distance = parseDouble(fields[219]);
+                if (distance == null || distance == 0.0) continue;
+                Integer year = parseInt(fields[15]);
 
                 Exoplanet planet = new Exoplanet(name, hostStar, radius, mass, orbitalPeriod, discoveryMethod, distance, year);
 
                 planets.add(planet);
             }
+            
 
 
         } catch (IOException e) {

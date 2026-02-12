@@ -7,13 +7,13 @@ import java.util.*;
 public class QueryEngine {
 	
 	List<Exoplanet> planets;
-	List<Exoplanet> results;
+	private List<Exoplanet> results = new ArrayList<>();
 	
 	
 	// this is a constructor to takes a list of planets
     public QueryEngine(List<Exoplanet> p) {
         // to record a copy so original list does not change
-        this.planets = new ArrayList<>(planets);
+        this.planets = p;
     }
 	
 	public List<Exoplanet> filterByRadius(double min, double max) {
@@ -36,7 +36,7 @@ public class QueryEngine {
 	
 	public List<Exoplanet> filterByHostStar(String star) {
 		for (Exoplanet planet : planets) {
-			if (planet.getHostStar().equals(star)){
+			if (planet.getHostStar().toLowerCase().contains(star.toLowerCase())){
 				results.add(planet);
 			}
 		}
@@ -53,9 +53,9 @@ public class QueryEngine {
 		
 	}
 	
-	public List<Exoplanet> filterByYear(double min, double max) {
+	public List<Exoplanet> filterByYear(int year) {
 		for (Exoplanet planet:planets) {
-			if (planet.getYear() >= min && planet.getYear() <= max) {
+			if (planet.getYear() == year) {
 				results.add(planet);
 			}
 		}
@@ -74,6 +74,15 @@ public class QueryEngine {
 	public List<Exoplanet> filterByDistance(double min, double max) {
 		for (Exoplanet planet: planets) {
 			if (planet.getDistance() >= min && planet.getDistance() <= max) {
+				results.add(planet);
+			}
+		}
+		return results;
+	}
+	
+	public List<Exoplanet> filterByName(String name) {
+		for (Exoplanet planet : planets) {
+			if (planet.getName().toLowerCase().contains(name.toLowerCase())) {
 				results.add(planet);
 			}
 		}
