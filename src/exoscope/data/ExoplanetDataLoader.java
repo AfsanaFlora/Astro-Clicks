@@ -44,6 +44,7 @@ public class ExoplanetDataLoader {
                 Double distance = parseDouble(fields[219]);
                 if (distance == null || distance == 0.0) continue;
                 Integer year = parseInt(fields[15]);
+                if (year == null || year == 0.0) continue;
 
                 Exoplanet planet = new Exoplanet(name, hostStar, radius, mass, orbitalPeriod, discoveryMethod, distance, year);
 

@@ -16,9 +16,6 @@ public class Main {
         // to load all planets from the file
         List<Exoplanet> planets = loader.loadExoplanets();
         
-        for (int i = 0; i < 5 && i < planets.size(); i++) {
-            System.out.println(planets.get(i));
-        }
         
         MainView mv = new MainView(planets);
         mv.start();
