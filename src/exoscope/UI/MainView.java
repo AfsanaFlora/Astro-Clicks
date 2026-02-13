@@ -137,7 +137,7 @@ public class MainView {
 			for (int i = x; i < y; i++) {
 				System.out.println(results.get(i).toString());
 			}
-			System.out.println("Would you like to see more results?");
+			System.out.println("Would you like to see more results? (y/n)");
 			kg = sc.nextLine();
 			x += 5;
 			y += 5;
