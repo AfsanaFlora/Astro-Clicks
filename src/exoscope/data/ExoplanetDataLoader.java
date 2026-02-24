@@ -1,5 +1,5 @@
-// https://stackoverflow.com/questions/76407302/how-to-read-large-csv-data-into-memory-with-bufferedreader
 package data;
+
 import model.Exoplanet;
 import java.io.*;
 import java.util.*;
@@ -8,71 +8,106 @@ public class ExoplanetDataLoader {
 
     private String filePath;
 
-    // this is constructor
+    // for constructor
     public ExoplanetDataLoader(String filePath) {
         this.filePath = filePath;
     }
 
-    // the method to load planets and return list
+    // this is to load planets from CSV and returns list
     public List<Exoplanet> loadExoplanets() {
 
         List<Exoplanet> planets = new ArrayList<>();
-        System.out.println(new File ("").getAbsolutePath());
-        
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             String line;
-            br.readLine(); // so we can skip header
 
+            // skip comment lines that start with #
+            while ((line = br.readLine()) != null && line.startsWith("#")) {
+                // skip
+            }
+
+            // if no header found
+            if (line == null) {
+                return planets;
+            }
+
+            // header row
+            String[] headers = line.split(",");
+
+            // map column name to index
+            Map<String, Integer> colIndex = new HashMap<>();
+            for (int i = 0; i < headers.length; i++) {
+                colIndex.put(headers[i].trim(), i);
+            }
+
+            // this is to read data rows
             while ((line = br.readLine()) != null) {
 
-                String[] fields = line.split(",");
+                // split while handling quoted commas
+                String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
-                // to skip lines that don't have enough columns
-                if (fields.length < 8) continue;
+                String name = getField(fields, colIndex, "pl_name");
+                String hostStar = getField(fields, colIndex, "hostname");
 
-                String name = fields[0];
-                String hostStar = fields[1];
+                Double radius = parseDouble(getField(fields, colIndex, "pl_rade"));
+                Double orbitalPeriod = parseDouble(getField(fields, colIndex, "pl_orbper"));
 
-                Double radius = parseDouble(fields[2]);
-                Double mass = parseDouble(fields[3]);
-                Double orbitalPeriod = parseDouble(fields[4]);
+                String discoveryMethod = getField(fields, colIndex, "discoverymethod");
+                Integer year = parseInt(getField(fields, colIndex, "disc_year"));
 
-                String discoveryMethod = fields[5];
-                Double distance = parseDouble(fields[6]);
-                Integer year = parseInt(fields[7]);
+              
+                Double mass = parseDouble(getField(fields, colIndex, "pl_masse"));
+                Double distance = parseDouble(getField(fields, colIndex, "st_dist"));
 
-                Exoplanet planet = new Exoplanet(name, hostStar, radius, mass, orbitalPeriod, discoveryMethod, distance, year);
+                Exoplanet planet = new Exoplanet(
+                        name,
+                        hostStar,
+                        radius,
+                        mass,
+                        orbitalPeriod,
+                        discoveryMethod,
+                        distance,
+                        year
+                );
 
                 planets.add(planet);
             }
 
-
         } catch (IOException e) {
-            System.out.println("there's been an error in loading this csv file: " + e.getMessage());
+            System.out.println("Error loading CSV: " + e.getMessage());
         }
 
         return planets;
     }
 
+    // so we can safely get field by column name
+    private String getField(String[] fields, Map<String, Integer> map, String key) {
+        Integer index = map.get(key);
+        if (index == null || index >= fields.length) {
+            return null;
+        }
+        String value = fields[index].trim();
+        return value.isEmpty() ? null : value;
+    }
+
+    // this wil safely parse double vals
     private Double parseDouble(String value) {
         try {
-            if (value == null || value.trim().isEmpty()) return null;
+            if (value == null) return null;
             return Double.parseDouble(value);
         } catch (NumberFormatException e) {
             return null;
         }
     }
 
+    // this will safely parse intgerss
     private Integer parseInt(String value) {
         try {
-            if (value == null || value.trim().isEmpty()) return null;
+            if (value == null) return null;
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
             return null;
         }
     }
 }
-
-//
