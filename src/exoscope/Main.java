@@ -9,15 +9,30 @@ public class Main {
 
     public static void main(String[] args) {
     
-        // to create the data loader & then give it the csv file path
-        ExoplanetDataLoader loader =
-                new ExoplanetDataLoader("src/exoscope/data/exoplanets.csv");
+    	String primaryPath = "src/exoscope/data/exoplanets.csv";
+        String fallbackPath = "data/exoplanets.csv";
 
-        // to load all planets from the file
+        String fileToUse = null;
+
+        File primaryFile = new File(primaryPath);
+        File fallbackFile = new File(fallbackPath);
+
+        if (primaryFile.exists()) {
+            fileToUse = primaryPath;
+        } else if (fallbackFile.exists()) {
+            fileToUse = fallbackPath;
+        } else {
+            System.err.println("ERROR: Could not locate exoplanets.csv file.");
+            System.err.println("Checked locations:");
+            System.err.println(" - " + primaryPath);
+            System.err.println(" - " + fallbackPath);
+            System.exit(1);
+        }
+
+        ExoplanetDataLoader loader = new ExoplanetDataLoader(fileToUse);
         List<Exoplanet> planets = loader.loadExoplanets();
-        
-        
-        MainView mv = new MainView(planets);
-        mv.start();
+
+        MainView view = new MainView(planets);
+        view.start();
     }
 }
