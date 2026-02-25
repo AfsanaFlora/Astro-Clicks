@@ -10,7 +10,6 @@ public class QueryEngine {
 	List<Exoplanet> planets;
 	// List<Exoplanet> results;
 	
-	
 	// this is a constructor to takes a list of planets
     public QueryEngine(List<Exoplanet> p) {
         // to record a copy so original list does not change
@@ -88,6 +87,12 @@ public class QueryEngine {
 		return results;
 	}
 	
-	
+	// bug c3a-2 this cals start index properly and returns empty if page dosent exist
+	public List<Exoplanet> getPage(List<Exoplanet> results, int page, int pageSize) {
+	    int start = (page - 1) * pageSize;
+	    int end = Math.min(start + pageSize, results.size());
+	    if (start >= results.size()) return new ArrayList<>(); // no results for this page
+	    return new ArrayList<>(results.subList(start, end)); // fresh list
+	}	
 
 }
