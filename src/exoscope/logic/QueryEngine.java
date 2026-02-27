@@ -17,6 +17,7 @@ public class QueryEngine {
     }
 	
 	public List<Exoplanet> filterByRadius(double min, double max) {
+		List<Exoplanet> results = new ArrayList<>(); // bug fix
 		for (Exoplanet planet : planets) {
 			if (planet.getRadius() >= min && planet.getRadius() <= max) {
 				results.add(planet);
@@ -26,6 +27,7 @@ public class QueryEngine {
 	}
 	
 	public List<Exoplanet> filterByMass(double min, double max) {
+		List<Exoplanet> results = new ArrayList<>(); // bug fix
 		for (Exoplanet planet : planets) {
 			if (planet.getMass() >= min && planet.getMass() <= max) {
 				results.add(planet);
@@ -35,6 +37,7 @@ public class QueryEngine {
 	}
 	
 	public List<Exoplanet> filterByHostStar(String star) {
+		List<Exoplanet> results = new ArrayList<>(); //bug fix
 		for (Exoplanet planet : planets) {
 			if (planet.getHostStar().toLowerCase().contains(star.toLowerCase())){
 				results.add(planet);
@@ -44,6 +47,7 @@ public class QueryEngine {
 	}
 	
 	public List<Exoplanet> filterByOrbitalPeriod(double min, double max) {
+		 List<Exoplanet> results = new ArrayList<>(); // bug fixx
 		for (Exoplanet planet: planets) {
 			if (planet.getOrbitalPeriod() >= min && planet.getOrbitalPeriod() <= max) {
 				results.add(planet);
@@ -63,6 +67,7 @@ public class QueryEngine {
 	}
 	
 	public List<Exoplanet> filterByDiscoveryMethod(String dm) {
+		List<Exoplanet> results = new ArrayList<>(); //bug fix
 		for (Exoplanet planet : planets) {
 			if (planet.getDiscoveryMethod().equals(dm)) {
 				results.add(planet);
@@ -72,6 +77,7 @@ public class QueryEngine {
 	}
 	
 	public List<Exoplanet> filterByDistance(double min, double max) {
+		List<Exoplanet> results = new ArrayList<>(); //bug fix
 		for (Exoplanet planet: planets) {
 			if (planet.getDistance() >= min && planet.getDistance() <= max) {
 				results.add(planet);

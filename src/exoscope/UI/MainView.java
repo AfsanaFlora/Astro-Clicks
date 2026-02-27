@@ -14,6 +14,7 @@ public class MainView {
 		this.planets = p;
 	}
 	
+
 	public void start() {
 		this.queryEngine = new QueryEngine(planets);
 		System.out.println("		WELCOME TO: EXOSCOPE");
@@ -153,3 +154,5 @@ public class MainView {
 		}
 	}
 }
+
+
